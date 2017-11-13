@@ -135,6 +135,9 @@
       <div class="el-picker-panel__footer" v-if="showTime">
         <a
           class="el-picker-panel__link-btn"
+          @click="handleCancel">{{ t('el.datepicker.cancel') }}</a>
+        <a
+          class="el-picker-panel__link-btn"
           @click="handleClear">{{ t('el.datepicker.clear') }}</a>
         <button
           type="button"
@@ -474,6 +477,10 @@
 
       handleConfirm(visible = false) {
         this.$emit('pick', [this.minDate, this.maxDate], visible);
+      },
+
+      handleCancel() {
+        this.$emit('cancel');
       },
 
       resetDate() {

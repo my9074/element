@@ -501,6 +501,10 @@ export default {
         this.refInput.setSelectionRange(start, end);
         this.refInput.focus();
       });
+
+      this.picker.$on('cancel', () => {
+        this.pickerVisible = this.picker.visible = false;
+      });
     },
 
     unmountPicker() {

@@ -418,8 +418,10 @@
               });
             } else {
               const minDate = new Date(newDate.getTime());
+              const maxDate = this.minDate;
+              this.rangeState.selecting = false;
 
-              this.$emit('pick', { minDate, maxDate: this.maxDate }, false);
+              this.$emit('pick', { minDate, maxDate });
             }
           } else if (!this.minDate) {
             const minDate = new Date(newDate.getTime());
