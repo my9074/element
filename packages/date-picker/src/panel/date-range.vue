@@ -89,6 +89,16 @@
                 @click="prevMonth"
                 class="el-picker-panel__icon-btn el-icon-arrow-left"></button>
               <div>{{ leftLabel }}</div>
+              <div v-if="arrowBtnVisible">
+                <button
+                  type="button"
+                  @click="nextLYear"
+                  class="el-picker-panel__icon-btn el-icon-d-arrow-right"></button>
+                <button
+                  type="button"
+                  @click="nextLMonth"
+                  class="el-picker-panel__icon-btn el-icon-arrow-right"></button>
+              </div>
             </div>
             <date-table
               selection-mode="range"
@@ -106,6 +116,17 @@
           </div>
           <div class="el-picker-panel__content el-date-range-picker__content is-right">
             <div class="el-date-range-picker__header">
+              <div v-if="arrowBtnVisible">
+                <button
+                  type="button"
+                  @click="prevRYear"
+                  class="el-picker-panel__icon-btn el-icon-d-arrow-left"></button>
+                <button
+                  type="button"
+                  @click="prevRMonth"
+                  class="el-picker-panel__icon-btn el-icon-arrow-left"></button>
+              </div>
+              <div>{{ rightLabel }}</div>
               <button
                 type="button"
                 @click="nextYear"
@@ -114,8 +135,7 @@
                 type="button"
                 @click="nextMonth"
                 class="el-picker-panel__icon-btn el-icon-arrow-right"></button>
-              <div>{{ rightLabel }}</div>
-            </div>
+          </div>
             <date-table
               selection-mode="range"
               :date="rightDate"
@@ -163,6 +183,8 @@
       return new Date(defaultValue);
     }
   };
+
+  const getNextMonth = date => date instanceof Date ? new Date(date.setMonth(date.getMonth() + 1)) : new Date();
 
   export default {
     mixins: [Locale],
@@ -213,17 +235,22 @@
       },
 
       rightDate() {
-        const newDate = new Date(this.date);
-        const month = newDate.getMonth();
+        const newDate = new Date(this.rDate);
         newDate.setDate(1);
 
-        if (month === 11) {
-          newDate.setFullYear(newDate.getFullYear() + 1);
-          newDate.setMonth(0);
-        } else {
-          newDate.setMonth(month + 1);
-        }
         return newDate;
+      },
+
+      arrowBtnVisible() {
+        const rDate = new Date(this.rDate);
+        const rYear = rDate.getFullYear();
+        const rMonth = rDate.getMonth();
+
+        const lDate = new Date(this.date);
+        const lYear = lDate.getFullYear();
+        const lMonth = lDate.getMonth();
+
+        return !(rYear === lYear && rMonth - lMonth === 1) && !(rYear - lYear === 1 && rMonth - lMonth === -11);
       }
     },
 
@@ -233,6 +260,7 @@
         minPickerWidth: 0,
         maxPickerWidth: 0,
         date: this.$options.defaultValue ? calcDefaultValue(this.$options.defaultValue) : new Date(),
+        rDate: this.$options.defaultValue ? getNextMonth(calcDefaultValue(this.$options.defaultValue)) : getNextMonth(new Date()),
         minDate: '',
         maxDate: '',
         rangeState: {
@@ -299,6 +327,13 @@
           this.minDate = newVal[0] ? toDate(newVal[0]) : null;
           this.maxDate = newVal[1] ? toDate(newVal[1]) : null;
           if (this.minDate) this.date = new Date(this.minDate);
+          if (this.maxDate) {
+            if (this.maxDate.getMonth() === this.minDate.getMonth() && this.maxDate.getFullYear() === this.minDate.getFullYear()) {
+              this.rDate = getNextMonth(new Date(this.minDate));
+            } else {
+              this.rDate = new Date(this.maxDate);
+            }
+          };
           this.handleConfirm(true);
         }
       }
@@ -309,6 +344,7 @@
         this.minDate = null;
         this.maxDate = null;
         this.date = this.$options.defaultValue ? calcDefaultValue(this.$options.defaultValue) : new Date();
+        this.rDate = this.$options.defaultValue ? getNextMonth(calcDefaultValue(this.$options.defaultValue)) : getNextMonth(new Date());
         this.handleConfirm(false);
       },
 
@@ -459,11 +495,25 @@
         this.date = prevMonth(this.date);
       },
 
+      prevRMonth() {
+        this.rDate = prevMonth(this.rDate);
+      },
+
       nextMonth() {
+        this.rDate = nextMonth(this.rDate);
+      },
+
+      nextLMonth() {
         this.date = nextMonth(this.date);
       },
 
       nextYear() {
+        const date = this.rDate;
+        date.setFullYear(date.getFullYear() + 1);
+        this.resetDate();
+      },
+
+      nextLYear() {
         const date = this.date;
         date.setFullYear(date.getFullYear() + 1);
         this.resetDate();
@@ -471,6 +521,12 @@
 
       prevYear() {
         const date = this.date;
+        date.setFullYear(date.getFullYear() - 1);
+        this.resetDate();
+      },
+
+      prevRYear() {
+        const date = this.rDate;
         date.setFullYear(date.getFullYear() - 1);
         this.resetDate();
       },
@@ -485,6 +541,7 @@
 
       resetDate() {
         this.date = new Date(this.date);
+        this.rDate = new Date(this.rDate);
       }
     },
 
