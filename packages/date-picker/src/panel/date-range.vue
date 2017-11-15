@@ -184,7 +184,14 @@
     }
   };
 
-  const getNextMonth = date => date instanceof Date ? new Date(date.setMonth(date.getMonth() + 1)) : new Date();
+  const getNextMonth = date => {
+    if (date instanceof Date) {
+      let timeStamp = date.getTime();
+      let dateTemp = new Date(timeStamp);
+      return new Date(dateTemp.setMonth(dateTemp.getMonth() + 1));
+    }
+    return new Date();
+  };
 
   export default {
     mixins: [Locale],
