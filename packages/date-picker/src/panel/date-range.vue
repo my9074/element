@@ -89,16 +89,16 @@
                 @click="prevMonth"
                 class="el-picker-panel__icon-btn el-icon-arrow-left"></button>
               <div>{{ leftLabel }}</div>
-              <div v-if="arrowBtnVisible">
-                <button
-                  type="button"
-                  @click="nextLYear"
-                  class="el-picker-panel__icon-btn el-icon-d-arrow-right"></button>
-                <button
-                  type="button"
-                  @click="nextLMonth"
-                  class="el-picker-panel__icon-btn el-icon-arrow-right"></button>
-              </div>
+              <button
+                type="button"
+                @click="nextLYear"
+                class="el-picker-panel__icon-btn el-icon-d-arrow-right"
+                v-if="arrowBtnVisible"></button>
+              <button
+                type="button"
+                @click="nextLMonth"
+                class="el-picker-panel__icon-btn el-icon-arrow-right"
+                v-if="arrowBtnVisible"></button>
             </div>
             <date-table
               selection-mode="range"
@@ -116,16 +116,16 @@
           </div>
           <div class="el-picker-panel__content el-date-range-picker__content is-right">
             <div class="el-date-range-picker__header">
-              <div v-if="arrowBtnVisible">
-                <button
-                  type="button"
-                  @click="prevRYear"
-                  class="el-picker-panel__icon-btn el-icon-d-arrow-left"></button>
-                <button
-                  type="button"
-                  @click="prevRMonth"
-                  class="el-picker-panel__icon-btn el-icon-arrow-left"></button>
-              </div>
+              <button
+                type="button"
+                @click="prevRYear"
+                class="el-picker-panel__icon-btn el-icon-d-arrow-left" 
+                v-if="arrowBtnVisible"></button>
+              <button
+                type="button"
+                @click="prevRMonth"
+                class="el-picker-panel__icon-btn el-icon-arrow-left" 
+                v-if="arrowBtnVisible"></button>
               <div>{{ rightLabel }}</div>
               <button
                 type="button"
@@ -555,3 +555,23 @@
     components: { TimePicker, DateTable, ElInput }
   };
 </script>
+<style>
+  .el-date-range-picker__header button {
+    position: relative;
+    z-index: 1;
+  }
+  .el-picker-panel__icon-btn.el-icon-d-arrow-right, .el-picker-panel__icon-btn.el-icon-arrow-right {
+    float: right;
+  }
+  .el-date-range-picker__content.is-right .el-date-range-picker__header button.el-picker-panel__icon-btn.el-icon-d-arrow-left, .el-date-range-picker__content.is-right .el-date-range-picker__header button.el-picker-panel__icon-btn.el-icon-arrow-left {
+    float: left;
+  }
+  .el-date-range-picker__header div, .el-date-range-picker__content.is-right .el-date-range-picker__header div {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    margin: 0;
+    z-index: 0;
+    
+  }
+</style>
