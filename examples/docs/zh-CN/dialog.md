@@ -22,6 +22,8 @@
         dialogVisible: false,
         dialogTableVisible: false,
         dialogFormVisible: false,
+        outerVisible: false,
+        innerVisible: false,
         form: {
           name: '',
           region: '',
@@ -193,6 +195,40 @@ Dialog 组件的内容可以是任意的，甚至可以是表格或表单，下�
 ```
 :::
 
+### 嵌套的 Dialog
+如果需要在一个 Dialog 内部嵌套另一个 Dialog，需要使用 `append-to-body` 属性。
+:::demo 正常情况下，我们不建议使用嵌套的 Dialog，如果需要在页面上同时显示多个 Dialog，可以将它们平级放置。对于确实需要嵌套 Dialog 的场景，我们提供了`append-to-body`属性。将内层 Dialog 的该属性设置为 true，它就会插入至 body 元素上，从而保证内外层 Dialog 和遮罩层级关系的正确。
+```html
+<template>
+  <el-button type="text" @click="outerVisible = true">点击打开外层 Dialog</el-button>
+  
+  <el-dialog title="外层 Dialog" :visible.sync="outerVisible">
+    <el-dialog
+      width="30%"
+      title="内层 Dialog"
+      :visible.sync="innerVisible"
+      append-to-body>
+    </el-dialog>
+    <div slot="footer" class="dialog-footer">
+      <el-button @click="outerVisible = false">取 消</el-button>
+      <el-button type="primary" @click="innerVisible = true">打开内层 Dialog</el-button>
+    </div>
+  </el-dialog>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        outerVisible: false,
+        innerVisible: false
+      };
+    }
+  }
+</script>
+```
+:::
+
 ### Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
@@ -202,6 +238,7 @@ Dialog 组件的内容可以是任意的，甚至可以是表格或表单，下�
 | top       | Dialog CSS 中的 top 值（仅在 size 不为 full 时有效） | string | — | 15% |
 | modal     | 是否需要遮罩层   | boolean   | — | true |
 | modal-append-to-body     | 遮罩层是否插入至 body 元素上，若为 false，则遮罩层会插入至 Dialog 的父元素上   | boolean   | — | true |
+| append-to-body     | Dialog 自身是否插入至 body 元素上。嵌套的 Dialog 必须指定该属性并赋值为 true   | boolean   | — | false |
 | lock-scroll | 是否在 Dialog 出现时将 body 滚动锁定 | boolean | — | true |
 | custom-class      | Dialog 的自定义类名 | string    | — | — |
 | close-on-click-modal | 是否可以通过点击 modal 关闭 Dialog | boolean    | — | true |

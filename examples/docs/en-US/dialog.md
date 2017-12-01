@@ -22,6 +22,8 @@
         dialogVisible: false,
         dialogTableVisible: false,
         dialogFormVisible: false,
+        outerVisible: false,
+        innerVisible: false,
         form: {
           name: '',
           region: '',
@@ -196,6 +198,40 @@ The content of Dialog can be anything, even a table or a form. This example show
 ```
 :::
 
+### Nested Dialog
+If a Dialog is nested in another Dialog, `append-to-body` is required.
+:::demo Normally we do not recommend using nested Dialog. If you need multiple Dialogs rendered on the page, you can simply flat them so that they're siblings to each other. If you must nest a Dialog inside another Dialog, set `append-to-body` of the nested Dialog to true, and it will append to body instead of its parent node, so both Dialogs can be correctly rendered.
+```html
+<template>
+  <el-button type="text" @click="outerVisible = true">open the outer Dialog</el-button>
+  
+  <el-dialog title="Outter Dialog" :visible.sync="outerVisible">
+    <el-dialog
+        width="30%"
+        title="Inner Dialog"
+        :visible.sync="innerVisible"
+        append-to-body>
+    </el-dialog>
+    <div slot="footer" class="dialog-footer">
+      <el-button @click="outerVisible = false">Cancel</el-button>
+      <el-button type="primary" @click="innerVisible = true">open the inner Dialog</el-button>
+    </div>
+  </el-dialog>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        outerVisible: false,
+        innerVisible: false
+      };
+    }
+  }
+</script>
+```
+:::
+
 ### Attributes
 
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
@@ -206,6 +242,7 @@ The content of Dialog can be anything, even a table or a form. This example show
 | top      | value for `top` of Dialog CSS, works when `size` is not `full` | string    | — | 15% |
 | modal     | whether a mask is displayed | boolean   | — | true |
 | modal-append-to-body     | whether to append modal to body element. If false, the modal will be appended to Dialog's parent element | boolean   | — | true |
+| append-to-body     | Dialog 自身是否插入至 body 元素上。嵌套的 Dialog 必须指定该属性并赋值为 true   | boolean   | — | false |
 | lock-scroll     | whether scroll of body is disabled while Dialog is displayed | boolean   | — | true |
 | custom-class      | custom class names for Dialog | string    | — | — |
 | close-on-click-modal | whether the Dialog can be closed by clicking the mask | boolean    | — | true |

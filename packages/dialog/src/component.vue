@@ -49,6 +49,11 @@
         default: true
       },
 
+      appendToBody: {
+        type: Boolean,
+        default: false
+      },
+
       lockScroll: {
         type: Boolean,
         default: true
@@ -95,6 +100,9 @@
           this.$nextTick(() => {
             this.$refs.dialog.scrollTop = 0;
           });
+          if (this.appendToBody) {
+            document.body.appendChild(this.$el);
+          }
         } else {
           this.$el.removeEventListener('scroll', this.updatePopper);
           this.$emit('close');
@@ -139,6 +147,9 @@
       if (this.visible) {
         this.rendered = true;
         this.open();
+        if (this.appendToBody) {
+          document.body.appendChild(this.$el);
+        }
       }
     }
   };
