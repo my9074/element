@@ -91,6 +91,36 @@ npm run dist
 ```
 </details>
 
+<details>
+<summary>如何使用京东云版 Element-ui？</summary>
+
+由于该组件库存放在京东自己的私有 npm 库 jnpm 中，所以安装的时候需要先安装 jnpm：
+```
+npm install @jd/jnpm -g --registry=http://registry.m.jd.com
+```
+
+或者为 npm 建立一个别名 jnpm，以下为 Ubuntu 下示例代码，其他操作系统可能有所差异：
+```
+alias jnpm="npm --registry=http://registry.m.jd.com \
+--cache=$HOME/.npm/.cache/jnpm \
+
+#Or alias it in .bashrc or .zshrc
+$ echo '\n#alias for cnpm\nalias jnpm="npm --registry=http://registry.m.jd.com \
+  --cache=$HOME/.npm/.cache/jnpm"' >> ~/.bashrc && source ~/.bashrc   
+```
+</details>
+
+<details>
+<summary>与 Element 官方的区别?</summary>
+
+由于饿了么官方的组件库，部分组件不能满足现有项目的需求，所以在此基础上为部分组件进行定制或添加新组件。
+
+@jd/Element-ui 是基于 Element 1.4.12 版本，所以较老的版本可能会出现非兼容性更新。（ 具体可以参考 CHANGELOG.zh-CN.md ）
+例如:
+- Select
+  - 值为对象类型时，需要提供一个 `value-key` 作为唯一性标识，#5897
+</details>
+
 ## FAQ
 
 <details>

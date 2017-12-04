@@ -1,7 +1,7 @@
 {
-  "name": "element-ui",
+  "name": "@jd/element-ui",
   "version": "1.4.12",
-  "description": "A Component Library for Vue.js.",
+  "description": "A Vue component library that JD-Cloud is customized based on Element.",
   "main": "lib/element-ui.common.js",
   "files": [
     "lib",
@@ -31,10 +31,6 @@
   "faas": {
     "domain": "element",
     "public": "temp_web/element"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:ElemeFE/element.git"
   },
   "homepage": "http://element.eleme.io",
   "keywords": [
