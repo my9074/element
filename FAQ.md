@@ -1,6 +1,36 @@
 ## 常见问题
 
 <details>
+<summary>如何使用京东云版 Element-ui？</summary>
+
+由于该组件库存放在京东自己的私有 npm 库 jnpm 中，所以安装的时候需要先安装 jnpm：
+```shell
+npm install @jd/jnpm -g --registry=http://registry.m.jd.com
+```
+
+```shell
+jnpm install @jd/element-ui --save
+```
+
+``` javascript
+import Vue from 'vue'
+import Element from '@jd/element-ui'
+import '@jd/element-ui/lib/theme-default/index.css'
+
+Vue.use(Element)
+
+// or
+import {
+  Select,
+  Button
+  // ...
+} from '@jd/element-ui'
+
+Vue.component(Select.name, Select)
+Vue.component(Button.name, Button)
+```
+</details>
+<details>
 <summary>给组件绑定的事件为什么无法触发？</summary>
 
 在 Vue 2.0 中，为**自定义**组件绑定**原生**事件必须使用 `.native` 修饰符：
@@ -88,25 +118,6 @@ npm run dev
 
 ```bash
 npm run dist
-```
-</details>
-
-<details>
-<summary>如何使用京东云版 Element-ui？</summary>
-
-由于该组件库存放在京东自己的私有 npm 库 jnpm 中，所以安装的时候需要先安装 jnpm：
-```
-npm install @jd/jnpm -g --registry=http://registry.m.jd.com
-```
-
-或者为 npm 建立一个别名 jnpm，以下为 Ubuntu 下示例代码，其他操作系统可能有所差异：
-```
-alias jnpm="npm --registry=http://registry.m.jd.com \
---cache=$HOME/.npm/.cache/jnpm \
-
-#Or alias it in .bashrc or .zshrc
-$ echo '\n#alias for cnpm\nalias jnpm="npm --registry=http://registry.m.jd.com \
-  --cache=$HOME/.npm/.cache/jnpm"' >> ~/.bashrc && source ~/.bashrc   
 ```
 </details>
 
