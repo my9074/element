@@ -125,7 +125,6 @@
         let criteria = this.clearable &&
           !this.disabled &&
           this.inputHovering &&
-          !this.multiple &&
           this.value !== undefined &&
           this.value !== '';
         return criteria ? 'circle-close is-show-close' : (this.remote && this.filterable ? '' : 'caret-top');
@@ -610,7 +609,7 @@
 
       deleteSelected(event) {
         event.stopPropagation();
-        this.$emit('input', '');
+        this.multiple ? this.$emit('input', []) : this.$emit('input', '');
         this.visible = false;
         this.$emit('clear');
       },

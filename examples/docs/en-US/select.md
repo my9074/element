@@ -101,6 +101,7 @@
         value8: '',
         value9: [],
         value10: [],
+        value11: [],
         loading: false,
         states: ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"]
       };
@@ -120,6 +121,11 @@
           }, 200);
         } else {
           this.options4 = [];
+        }
+      },
+      handleChange(val) {
+        if (val.indexOf('all') > -1) {
+          this.value11 = this.options.map(option => option.value);
         }
       }
     }
@@ -354,6 +360,59 @@ Multiple select uses tags to display selected options.
           label: 'Option5'
         }],
         value5: []
+      }
+    }
+  }
+</script>
+```
+:::
+
+### Optional/Empty function
+
+Add an optional/empty feature based on multiple choice
+
+:::demo for ` el - the select ` ` multiple `, ` clearable `, attribute to enable alternative, clean, all function by ` change ` events.
+```html
+<template>
+  <el-select v-model="value11" multiple clearable placeholder="请选择" @change="handleChange">
+    <el-option value="all" label="All"></el-option>
+    <el-option
+      v-for="item in options"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value">
+    </el-option>
+  </el-select>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        options: [{
+          value: 'Option1',
+          label: 'Option1'
+        }, {
+          value: 'Option2',
+          label: 'Option2'
+        }, {
+          value: 'Option3',
+          label: 'Option3'
+        }, {
+          value: 'Option4',
+          label: 'Option4'
+        }, {
+          value: 'Option5',
+          label: 'Option5'
+        }],
+        value11: []
+      }
+    },
+    methods: {
+      handleChange(val) {
+        if (val.indexOf('all') > -1) {
+          this.value11 = this.options.map(option => option.value);
+        }
       }
     }
   }
@@ -648,7 +707,7 @@ If the binding value of Select is an object, make sure to assign `value-key` as 
 | disabled | whether Select is disabled | boolean | — | false |
 | value-key | unique identity key name for value, required when value is an object | string | — | value |
 | size | size of Input | string | large/small/mini | — |
-| clearable | whether single select can be cleared | boolean | — | false |
+| clearable | select can be cleared | boolean | — | false |
 | multiple-limit | maximum number of options user can select when `multiple` is `true`. No limit when set to 0 | number | — | 0 |
 | name | the name attribute of select input | string | — | — |
 | placeholder | placeholder | string | — | Select |

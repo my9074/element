@@ -101,6 +101,7 @@
         value8: '',
         value9: '',
         value10: [],
+        value11: [],
         loading: false,
         states: ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"]
       };
@@ -120,6 +121,11 @@
           }, 200);
         } else {
           this.options4 = [];
+        }
+      },
+      handleChange(val) {
+        if (val.indexOf('all') > -1) {
+          this.value11 = this.options.map(option => option.value);
         }
       }
     }
@@ -353,6 +359,59 @@
           label: '北京烤鸭'
         }],
         value5: []
+      }
+    }
+  }
+</script>
+```
+:::
+
+### 全选/清空的功能
+
+多选基础上添加 全选/清空 的功能
+
+:::demo 为`el-select`设置`multiple`、`clearable`，属性即可启用多选、清除，全选功能通过 `change` 事件实现。
+```html
+<template>
+  <el-select v-model="value11" multiple clearable placeholder="请选择" @change="handleChange">
+    <el-option value="all" label="全选"></el-option>
+    <el-option
+      v-for="item in options"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value">
+    </el-option>
+  </el-select>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        options: [{
+          value: '选项1',
+          label: '黄金糕'
+        }, {
+          value: '选项2',
+          label: '双皮奶'
+        }, {
+          value: '选项3',
+          label: '蚵仔煎'
+        }, {
+          value: '选项4',
+          label: '龙须面'
+        }, {
+          value: '选项5',
+          label: '北京烤鸭'
+        }],
+        value11: []
+      }
+    },
+    methods: {
+      handleChange(val) {
+        if (val.indexOf('all') > -1) {
+          this.value11 = this.options.map(option => option.value);
+        }
       }
     }
   }
@@ -643,7 +702,7 @@
 | disabled | 是否禁用 | boolean | — | false |
 | value-key | 作为 value 唯一标识的键名，绑定值为对象类型时必填 | string | — | value |
 | size | 输入框尺寸 | string | large/small/mini | — |
-| clearable | 单选时是否可以清空选项 | boolean | — | false |
+| clearable | 是否可以清空选项 | boolean | — | false |
 | multiple-limit | 多选时用户最多可以选择的项目数，为 0 则不限制 | number | — | 0 |
 | name | select input 的 name 属性 | string | — | — |
 | placeholder | 占位符 | string | — | 请选择 |
