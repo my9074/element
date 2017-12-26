@@ -1,5 +1,10 @@
 ## Changelog
 
+### 1.4.13
+*2017-12-26*
+
+- Select multi-select mode supports the clearable option
+
 ### 1.4.12
 
 *2017-11-30*
