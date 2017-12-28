@@ -1,5 +1,9 @@
 import navConfig from './nav.config.json';
+import navBusinessConfig from './nav.business.config.json';
+
 import langs from './i18n/route.json';
+
+const BUSINESS = true;
 
 const LOAD_MAP = {
   'zh-CN': name => {
@@ -31,17 +35,34 @@ const LOAD_DOCS_MAP = {
   }
 };
 
+const LOAD_BUSINESS_DOCS_MAP = {
+  'zh-CN': path => {
+    return r => require.ensure([], () =>
+      r(require(`./docs/zh-CN/business${path}.md`)),
+    'zh-CN');
+  },
+  'en-US': path => {
+    return r => require.ensure([], () =>
+      r(require(`./docs/en-US/business${path}.md`)),
+    'en-US');
+  }
+};
+
 const loadDocs = function(lang, path) {
   return LOAD_DOCS_MAP[lang](path);
 };
 
-const registerRoute = (navConfig) => {
+const loadBusinessDocs = function(lang, path) {
+  return LOAD_BUSINESS_DOCS_MAP[lang](path);
+};
+
+const registerRoute = (navConfig, isBusiness) => {
   let route = [];
   Object.keys(navConfig).forEach((lang, index) => {
     let navs = navConfig[lang];
     route.push({
-      path: `/${ lang }/component`,
-      redirect: `/${ lang }/component/installation`,
+      path: `/${ lang }/${ isBusiness ? 'business-component' : 'component' }`,
+      redirect: `/${ lang }/${ isBusiness ? 'business-component/guide' : 'component/installation' }`,
       component: load(lang, 'component'),
       children: []
     });
@@ -65,7 +86,7 @@ const registerRoute = (navConfig) => {
   function addRoute(page, lang, index) {
     const component = page.path === '/changelog'
       ? load(lang, 'changelog')
-      : loadDocs(lang, page.path);
+      : isBusiness ? loadBusinessDocs(lang, page.path) : loadDocs(lang, page.path);
     let child = {
       path: page.path.slice(1),
       meta: {
@@ -73,7 +94,7 @@ const registerRoute = (navConfig) => {
         description: page.description,
         lang
       },
-      name: 'component-' + (page.title || page.name),
+      name: (isBusiness ? 'business-component-' : 'component-') + (page.title || page.name),
       component: component.default || component
     };
 
@@ -83,7 +104,9 @@ const registerRoute = (navConfig) => {
   return route;
 };
 
-let route = registerRoute(navConfig);
+let componentRoute = registerRoute(navConfig);
+let businessRoute = registerRoute(navBusinessConfig, BUSINESS);
+let route = [...componentRoute, ...businessRoute];
 
 const generateMiscRoutes = function(lang) {
   let guideRoute = {

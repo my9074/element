@@ -70,11 +70,12 @@
   <div class="page-container page-component">
     <el-row>
       <el-col :xs="24" :sm="6">
-        <side-nav :data="navsData[lang]" :base="`/${ lang }/component`"></side-nav>
+        <side-nav v-if="isBusiness" :data="navsBusinessData[lang]" :base="`/${ lang }/business-component`"></side-nav>
+        <side-nav v-else :data="navsData[lang]" :base="`/${ lang }/component`"></side-nav>
       </el-col>
       <el-col :xs="24" :sm="18">
         <router-view class="content"></router-view>
-        <footer-nav></footer-nav>
+        <footer-nav v-if="!isBusiness"></footer-nav>
       </el-col>
     </el-row>
     <transition name="back-top-fade">
@@ -93,14 +94,21 @@
 <script>
   import navsData from '../../nav.config.json';
   import throttle from 'throttle-debounce/throttle';
+  import navsBusinessData from '../../nav.business.config.json';
   export default {
     data() {
       return {
         lang: this.$route.meta.lang,
         navsData,
+        navsBusinessData,
         hover: false,
         showBackToTop: false
       };
+    },
+    computed: {
+      isBusiness() {
+        return this.$route.path.includes('business-component');
+      }
     },
     methods: {
       toTop() {

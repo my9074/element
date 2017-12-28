@@ -188,6 +188,12 @@
               :to="`/${ lang }/component`">{{ langConfig.components }}
             </router-link>
           </li>
+           <li class="nav-item">
+            <router-link
+              active-class="active"
+              :to="`/${ lang }/business-component`">{{ langConfig.businessComponents }}
+            </router-link>
+          </li>
           <li class="nav-item">
             <router-link
               active-class="active"
