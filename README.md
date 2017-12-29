@@ -42,18 +42,10 @@
 - [Mint UI](https://github.com/ElemeFE/mint-ui) - Mobile UI elements for Vue.js
 
 ## Install
-由于发布在 JD 内部仓库，所以需要安装 jnpm ：
-
-```shell
-npm install @jd/jnpm -g --registry=http://registry.m.jd.com
-```
-
-
-```shell
-jnpm install @jd/element-ui --save
-```
+`npm install --save 'git+http://git.jd.com/FE/element.git'` 
 
 ## Quick Start
+### 标准方式
 ``` javascript
 import Vue from 'vue'
 import Element from '@jd/element-ui'
@@ -71,7 +63,23 @@ import {
 Vue.component(Select.name, Select)
 Vue.component(Button.name, Button)
 ```
-For more information, please refer to [Quick Start](http://element.eleme.io/#/en-US/component/quickstart) in our documentation.
+### 兼容现有 element 
+如果项目由 webpack 打包，可通过 webpack 提供的 `alias` 功能，添加 `'element-ui': @jd/element-ui` 别名映射
+
+``` javascript
+import Vue from 'vue'
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-default/index.css'
+
+Vue.use(ElementUI)
+
+// or
+import {
+  Select,
+  Button
+  // ...
+} from 'element-ui'
+```
 
 ## Browser Support
 Modern browsers and Internet Explorer 9+.
