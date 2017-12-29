@@ -22,6 +22,10 @@
         {
           "path": "/transition",
           "name": "内置过渡动画"
+        },
+        {
+          "path": "/innerResource",
+          "name": "内部资源"
         }
       ]
     },
