@@ -32,6 +32,10 @@
     "domain": "element",
     "public": "temp_web/element"
   },
+  "repository": {
+    "type": "git",
+    "url": "http://git.jd.com/FE/element.git"
+  },
   "homepage": "http://element.eleme.io",
   "keywords": [
     "eleme",
