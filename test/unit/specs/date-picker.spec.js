@@ -728,10 +728,10 @@ describe('DatePicker', () => {
       setTimeout(_ => {
         const newLeft = left.textContent.match(/\d+/g);
         const newRight = right.textContent.match(/\d+/g);
-        expect(leftText[1] - newLeft[1]).to.equal(2);
-        expect(leftText[0] - newLeft[0]).to.equal(0);
-        expect([-10, 2]).to.include(rightText[1] - newRight[1]);
-        expect([0, 1]).to.include(rightText[0] - newRight[0]);
+        expect(leftText[1] - newLeft[1]).to.equal(7);
+        expect(leftText[0] - newLeft[0]).to.equal(1);
+        expect([-10, 7]).to.include(rightText[1] - newRight[1]);
+        expect([0, -2]).to.include(rightText[0] - newRight[0]);
         done();
       }, DELAY);
     });
@@ -758,9 +758,9 @@ describe('DatePicker', () => {
         const newRight = right.textContent.match(/\d+/g);
 
         expect(leftText[1] - newLeft[1]).to.equal(0);
-        expect(leftText[0] - newLeft[0]).to.equal(2);
+        expect(leftText[0] - newLeft[0]).to.equal(19);
         expect(rightText[1] - newRight[1]).to.equal(0);
-        expect(rightText[0] - newRight[0]).to.equal(2);
+        expect(rightText[0] - newRight[0]).to.equal(-17);
         done();
       }, DELAY);
     });
