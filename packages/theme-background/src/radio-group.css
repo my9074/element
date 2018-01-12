@@ -1,0 +1,17 @@
+@charset "UTF-8";
+@import "./common/var.css";
+
+@component-namespace el {
+  @b radio-group {
+    display: inline-block;
+    font-size: 0;
+    line-height: 32px;
+    vertical-align: middle;
+
+    & .el-radio {
+      font-size: var(--radio-font-size);
+      margin-right: 15px;
+    }
+
+  }
+}

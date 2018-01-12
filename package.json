@@ -1,6 +1,6 @@
 {
   "name": "@jd/element-ui",
-  "version": "1.4.13",
+  "version": "1.4.14-rc1",
   "description": "A Vue component library that JD-Cloud is customized based on Element.",
   "main": "lib/element-ui.common.js",
   "files": [
@@ -11,7 +11,9 @@
   "scripts": {
     "bootstrap": "yarn || npm i",
     "build:file": "node build/bin/iconInit.js & node build/bin/build-entry.js & node build/bin/i18n.js & node build/bin/version.js",
-    "build:theme": "node build/bin/gen-cssfile && gulp build --gulpfile packages/theme-default/gulpfile.js && cp-cli packages/theme-default/lib lib/theme-default",
+    "build:theme": "node build/bin/gen-cssfile && npm run build:theme-default && npm run build:theme-background",
+    "build:theme-default": "gulp build --gulpfile packages/theme-default/gulpfile.js && cp-cli packages/theme-default/lib lib/theme-default",
+    "build:theme-background": "gulp build --gulpfile packages/theme-background/gulpfile.js && cp-cli packages/theme-background/lib lib/theme-background",
     "build:utils": "cross-env BABEL_ENV=utils babel src --out-dir lib --ignore src/index.js",
     "build:umd": "node build/bin/build-locale.js",
     "clean": "rimraf lib && rimraf packages/*/lib && rimraf test/**/coverage && lerna clean --yes",
