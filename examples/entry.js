@@ -4,12 +4,14 @@ import VueRouter from 'vue-router';
 import routes from './route.config';
 import Element from 'main/index.js';
 import 'packages/theme-default/src/index.css';
+import './assets/theme-background/index.css';
 import demoBlock from './components/demo-block.vue';
 import MainFooter from './components/footer.vue';
 import MainHeader from './components/header.vue';
 import SideNav from './components/side-nav';
 import FooterNav from './components/footer-nav';
 import title from './i18n/title.json';
+import { handleNamespace } from './utils';
 
 Vue.use(Element);
 Vue.use(VueRouter);
@@ -26,7 +28,9 @@ const router = new VueRouter({
 });
 
 router.afterEach(route => {
+  handleNamespace(route);
   const data = title[route.meta.lang];
+
   for (let val in data) {
     if (new RegExp('^' + val, 'g').test(route.name)) {
       document.title = data[val];

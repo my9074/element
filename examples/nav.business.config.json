@@ -10,23 +10,50 @@
       ]
     },
     {
-      "name": "基础业务组件",
+      "name": "运营后台",
       "groups": [
         {
-          "groupName": "Basic",
+          "groupName": "List",
           "list": [
             {
-              "path": "/table",
-              "title": "Table 布局"
+              "path": "/background/base-list",
+              "title": "基础后台列表",
+              "namespace": "background"
             }
           ]
         },
         {
-          "groupName": "Others",
+          "groupName": "Detail",
           "list": [
             {
-              "path": "/dialog",
-              "title": "Dialog 对话框"
+              "path": "/background/base-detail",
+              "title": "基础后台详情",
+              "namespace": "background"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "控制台",
+      "groups": [
+        {
+          "groupName": "List",
+          "list": [
+            {
+              "path": "/console/base-list",
+              "title": "基础控制台列表",
+              "namespace": "console"
+            }
+          ]
+        },
+        {
+          "groupName": "Detail",
+          "list": [
+            {
+              "path": "/console/base-detail",
+              "title": "基础控制台详情",
+              "namespace": "console"
             }
           ]
         }
@@ -44,23 +71,23 @@
       ]
     },
     {
-      "name": "Basic Business Components",
+      "name": "Operating background",
       "groups": [
         {
-          "groupName": "Basic",
+          "groupName": "List",
           "list": [
             {
-              "path": "/table",
-              "title": "Table"
+              "path": "/background/base-list",
+              "title": "Basic list"
             }
           ]
         },
         {
-          "groupName": "Others",
+          "groupName": "Detail",
           "list": [
             {
-              "path": "/dialog",
-              "title": "Dialog"
+              "path": "/background/base-detail",
+              "title": "Basic detail"
             }
           ]
         }

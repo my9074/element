@@ -92,6 +92,7 @@ const registerRoute = (navConfig, isBusiness) => {
       meta: {
         title: page.title || page.name,
         description: page.description,
+        namespace: page.namespace,
         lang
       },
       name: (isBusiness ? 'business-component-' : 'component-') + (page.title || page.name),
