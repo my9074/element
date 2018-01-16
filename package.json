@@ -1,6 +1,6 @@
 {
   "name": "@jd/element-ui",
-  "version": "1.4.14-rc1",
+  "version": "1.4.14-rc2",
   "description": "A Vue component library that JD-Cloud is customized based on Element.",
   "main": "lib/element-ui.common.js",
   "files": [
