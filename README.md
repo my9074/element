@@ -42,7 +42,12 @@
 - [Mint UI](https://github.com/ElemeFE/mint-ui) - Mobile UI elements for Vue.js
 
 ## Install
-`npm install --save 'git+http://git.jd.com/FE/element.git'` 
+由于项目存放在 jnpm 仓库中，但通过 `jnpm install` 无法生成 `package-lock.json` 文件，
+故需要将设置 `npm config` 将 `@jd` 的 scope 的地址指向 `jnpm` 的 `registry`
+
+>`npm config set @jd:registry http://registry.m.jd.com`
+>
+>`npm install @jd/element-ui`
 
 ## Quick Start
 ### 标准方式
