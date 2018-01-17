@@ -36,6 +36,16 @@
               "namespace": "background"
             }
           ]
+        },
+        {
+          "groupName": "Form",
+          "list": [
+            {
+              "path": "/background/base-form",
+              "title": "基础后台表单",
+              "namespace": "background"
+            }
+          ]
         }
       ]
     },
