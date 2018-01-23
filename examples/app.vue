@@ -60,7 +60,7 @@
 
   .container,
   .page-container {
-    width: 1140px;
+    width: 100%;
     padding: 0 30px;
     margin: 0 auto;
   }

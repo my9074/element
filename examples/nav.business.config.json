@@ -17,7 +17,12 @@
           "list": [
             {
               "path": "/background/base-list",
-              "title": "基础后台列表",
+              "title": "基础列表页",
+              "namespace": "background"
+            },
+            {
+              "path": "/background/advanced-list",
+              "title": "高级列表页",
               "namespace": "background"
             }
           ]

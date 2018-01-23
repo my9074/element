@@ -79,7 +79,7 @@
 
 用于展示多条结构类似的数据，可对数据进行排序、筛选、对比或其他自定义操作。
 
-### 基础列表
+### 高级列表页
 
 基础的表格展示用法。
 
@@ -88,11 +88,87 @@
   <template>
   <div id="cloudStorageList">
     <div class="page-header">
-      <h1>页面标题</h1>
+      <h1>云存储</h1>
+    </div>
+    <div class="table-filter-top">
+      <table>
+        <tr>
+          <td class="filter-box">
+            <el-form :model="form" :rules="rules" label-width="100px">
+              <el-row :gutter="20">
+                <el-col :span="8">
+                  <el-form-item label="用户 PIN：" prop="product">
+                    <el-input placeholder="用户 PIN"></el-input>
+                  </el-form-item>
+                </el-col>
+                <el-col :span="8">
+                  <el-form-item label="地域：" prop="status">
+                    <el-select v-model="value" placeholder="请选择">
+                      <el-option
+                        v-for="item in options"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value">
+                      </el-option>
+                    </el-select>
+                  </el-form-item>
+                </el-col>
+                <el-col :span="8">
+                  <el-form-item label="地域：" prop="status">
+                    <el-select v-model="value" placeholder="请选择">
+                      <el-option
+                        v-for="item in options"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value">
+                      </el-option>
+                    </el-select>
+                  </el-form-item>
+                </el-col>
+              </el-row>
+              <el-row :gutter="20">
+                <el-col :span="8">
+                  <el-form-item label="用户 PIN：" prop="product">
+                    <el-input placeholder="用户 PIN"></el-input>
+                  </el-form-item>
+                </el-col>
+                <el-col :span="8">
+                  <el-form-item label="地域：" prop="status">
+                    <el-select v-model="value" placeholder="请选择">
+                      <el-option
+                        v-for="item in options"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value">
+                      </el-option>
+                    </el-select>
+                  </el-form-item>
+                </el-col>
+                <el-col :span="8">
+                  <el-form-item label="地域：" prop="status">
+                    <el-select v-model="value" placeholder="请选择">
+                      <el-option
+                        v-for="item in options"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value">
+                      </el-option>
+                    </el-select>
+                  </el-form-item>
+                </el-col>
+              </el-row>
+            </el-form>
+          </td>
+          <td class="buttons-box">
+            <el-button type="primary">查 询</el-button>
+            <el-button>重 置</el-button>
+          </td>
+        </tr>
+      </table>
     </div>
     <div class="table-action-top">
       <div class="wrapper-action-primary">
-        <router-link to="/foo" class="el-button el-button--primary">资源报表</router-link><el-button @click="removeFile = true">删除文件</el-button>
+        <el-button type="primary" >资源报表</el-button><el-button type="primary" @click="removeFile = true">删除文件</el-button>
       </div>
     </div>
     <el-table :data="tableData" stripe>

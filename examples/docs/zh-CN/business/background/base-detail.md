@@ -31,9 +31,6 @@ export default {
       <h1>查看详情</h1>
       <a href="#" class="button-back">返回</a>
     </div>
-    <el-tabs v-model="activeName2" type="card" @tab-click="handleClick">
-      <el-tab-pane label="资源详情" name="first">
-
         <section class="section-wrapper">
           <div class="section-header">
             <h3>基本信息</h3>
@@ -189,9 +186,6 @@ export default {
             </el-form>
           </div>
         </section>
-
-      </el-tab-pane>
-    </el-tabs>
   </div>
 </template>
 
