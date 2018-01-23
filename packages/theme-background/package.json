@@ -1,7 +1,7 @@
 {
-  "name": "element-theme-default",
+  "name": "element-theme-background",
   "version": "1.4.13",
-  "description": "Element component default theme.",
+  "description": "Element component background theme.",
   "main": "lib/index.css",
   "style": "lib/index.css",
   "files": [
