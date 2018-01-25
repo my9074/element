@@ -13,7 +13,7 @@
       "name": "运营后台",
       "groups": [
         {
-          "groupName": "List",
+          "groupName": "列表页 List",
           "list": [
             {
               "path": "/background/base-list",
@@ -28,21 +28,26 @@
           ]
         },
         {
-          "groupName": "Detail",
+          "groupName": "详情页 Detail",
           "list": [
             {
               "path": "/background/base-detail",
-              "title": "基础后台详情",
+              "title": "基础详情页",
               "namespace": "background"
             }
           ]
         },
         {
-          "groupName": "Form",
+          "groupName": "表单页 Form",
           "list": [
             {
               "path": "/background/base-form",
-              "title": "基础后台表单",
+              "title": "基础表单页",
+              "namespace": "background"
+            },
+            {
+              "path": "/background/advanced-form",
+              "title": "高级表单页",
               "namespace": "background"
             }
           ]

@@ -41,6 +41,22 @@ export default {
     </div>
     <div class="wrapper-form">
       <el-form :model="form" :rules="rules" label-width="150px">
+        <section class="section-form-item"></section>
+          <h3 class="section-form-header">SEO优化设置</h3>
+          <el-form-item label="页面标题：" prop="title" :required="true">
+            <el-input placeholder="请输入页面标题"></el-input>
+            <span>0/25</span>
+          </el-form-item>
+          <el-form-item label="页面关键词：" prop="keyword">
+            <el-input placeholder="请输入页面关键词"></el-input>
+            <span>0/25</span>
+            <p class="form-item-help">建议4组词汇，用逗号隔开</p>
+          </el-form-item>
+          <el-form-item label="页面描述：" prop="desc">
+            <el-input type="textarea" placeholder="请输入页面描述"></el-input>
+            <span>0/75</span>
+          </el-form-item>
+        </section>
         <section class="section-form-item">
           <h3 class="section-form-header">规则设置</h3>
           <el-form-item label="商城订单号：" prop="orderNumber">
@@ -49,8 +65,31 @@ export default {
           <el-form-item label="每日用户数量：" prop="user">
             <el-input placeholder="不填默认为不限制"></el-input>
           </el-form-item>
+          <el-form-item label="每日开始结束时间：" prop="time">
+            <el-date-picker
+              v-model="value"
+              type="daterange"
+              placeholder="选择日期范围">
+            </el-date-picker>
+            <el-checkbox v-model="autoChecked" class="form-item-inline">自动开始结束</el-checkbox>
+          </el-form-item>
           <el-form-item label="每个用户购买数量：" prop="reason">
             <el-input placeholder="不填默认为不限制"></el-input>
+          </el-form-item>
+          <el-form-item label="是否判断实名认证：" prop="auth">
+            <el-checkbox-group v-model="checkList">
+              <el-checkbox label="个人实名认证"></el-checkbox>
+              <el-checkbox label="学生认证"></el-checkbox>
+              <el-checkbox label="企业"></el-checkbox>
+              <el-checkbox label="社会团体"></el-checkbox>
+              <el-checkbox label="自然人"></el-checkbox>
+              <el-checkbox label="基金会"></el-checkbox>
+              <el-checkbox label="个体工商户"></el-checkbox>
+              <el-checkbox label="党政国家机关"></el-checkbox>
+              <el-checkbox label="事业单位"></el-checkbox>
+              <el-checkbox label="民办非企业单位"></el-checkbox>
+            </el-checkbox-group>
+            <p class="form-item-help">如果未选择不判断实名状态</p>
           </el-form-item>
           <el-form-item label="是否限制新用户使用：" prop="limit">
             <el-radio-group v-model="radio">
@@ -76,6 +115,13 @@ export default {
               <el-checkbox label="内部重点"></el-checkbox>
             </el-checkbox-group>
             <p class="form-item-help">如果不勾选，则不判断用户分组</p>
+          </el-form-item>
+          <el-form-item label="活动状态：" prop="status">
+            <el-radio-group v-model="status">
+              <el-radio :label="0">关闭</el-radio>
+              <el-radio :label="1">暂停</el-radio>
+              <el-radio :label="2">开启</el-radio>
+            </el-radio-group>
           </el-form-item>
           <el-form-item label="">
             <el-button type="primary">确定</el-button>
