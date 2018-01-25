@@ -28,6 +28,10 @@
         color: #fff;
         text-decoration: none;
         display: block;
+
+        img {
+          height: 40px;
+        }
       }
 
       span {
@@ -167,12 +171,12 @@
       <div class="container">
         <h1><router-link :to="`/${ lang }`">
           <img
-            src="../assets/images/element-logo.svg"
-            alt="element-logo"
+            src="../assets/images/jcloud-logo.svg"
+            alt="jcloud-logo"
             class="nav-logo">
           <img
-            src="../assets/images/element-logo-small.svg"
-            alt="element-logo"
+            src="../assets/images/jcloud-logo-small.svg"
+            alt="jcloud-logo"
             class="nav-logo-small">
         </router-link></h1>
         <ul class="nav">
