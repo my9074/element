@@ -3,7 +3,25 @@ export default {
   name: "mongodbDetail",
   data() {
     return {
-      activeName2: 'first'
+      activeName2: 'first',
+      tableData: [
+        {
+          id: "3912211",
+          task: "禁用",
+          operator: "erp账户",
+          balance: "100",
+          createTime: "2016-07-31 19:03:44",
+          updateTime: "2016-07-31 19:03:44"
+        },
+        {
+          id: "3912211",
+          task: "发放",
+          operator: "erp账户",
+          balance: "100",
+          createTime: "2016-07-31 19:03:44",
+          updateTime: "2016-07-31 19:03:44"
+        }
+      ]
     };
   },
   methods: {
@@ -32,160 +50,130 @@ export default {
       <a href="#" class="button-back">返回</a>
     </div>
         <section class="section-wrapper">
-          <div class="section-header">
-            <h3>基本信息</h3>
-          </div>
-          <div class="section-content">
-            <el-form class="info-list-inline">
-              <el-row :gutter="20">
-                <el-col :span="8">
-                  <el-form-item label="ID：">
-                    <span>mongo-h4s8nhv1rt</span>
-                  </el-form-item>
-                </el-col>
-                <el-col :span="8">
-                  <el-form-item label="名称：">
-                    <span>mongo-h4s8nhv1rt</span>
-                  </el-form-item>
-                </el-col>
-                <el-col :span="8">
-                  <el-form-item label="计费类型：">
-                    <span>包年包月</span>
-                  </el-form-item>
-                </el-col>
-              </el-row>
-              <el-row :gutter="20">
-                <el-col :span="8">
-                  <el-form-item label="创建时间：">
-                    <span>2017-05-11 11:13:54</span>
-                  </el-form-item>
-                </el-col>
-                <el-col :span="8">
-                  <el-form-item label="到期时间：">
-                    <span>2017-12-11 14:52:37</span>
-                  </el-form-item>
-                </el-col>
-                <el-col :span="8">
-                  <el-form-item label="地域：">
-                    <span>华北-北京</span>
-                  </el-form-item>
-                </el-col>
-              </el-row>
-              <el-row :gutter="20">
-                <el-col :span="8">
-                  <el-form-item label="网络 ID：">
-                    <span>vpc-rx9qtghw8y</span>
-                  </el-form-item>
-                </el-col>
-                <el-col :span="8">
-                  <el-form-item label="子网 ID：">
-                    <span>subnet-ffdrwbd5kf</span>
-                  </el-form-item>
-                </el-col>
-                <el-col :span="8">
-                  <el-form-item label="可用区：">
-                    <span>可用区A(主)可用区A(从)可用区B(隐藏)</span>
-                  </el-form-item>
-                </el-col>
-              </el-row>
-              <el-row :gutter="20">
-                <el-col :span="8">
-                  <el-form-item label="状态：">
-                    <span>运行</span>
-                  </el-form-item>
-                </el-col>
-              </el-row>
-            </el-form>
-          </div>
-        </section>
-
-        <section class="section-wrapper">
-          <div class="section-header">
-            <h3>配置信息</h3>
-          </div>
-          <div class="section-content">
-            <el-form class="info-list-inline">
-              <el-row :gutter="20">
-                <el-col :span="8">
-                  <el-form-item label="数据库类型：">
-                    <span>MongoDB</span>
-                  </el-form-item>
-                </el-col>
-                <el-col :span="8">
-                  <el-form-item label="数据库版本：">
-                    <span>mongodb-3.2</span>
-                  </el-form-item>
-                </el-col>
-                <el-col :span="8">
-                  <el-form-item label="规格：">
-                    <span>1核 2GB</span>
-                  </el-form-item>
-                </el-col>
-              </el-row>
-              <el-row :gutter="20">
-                <el-col :span="8">
-                  <el-form-item label="存储空间：">
-                    <span>10GB</span>
-                  </el-form-item>
-                </el-col>
-              </el-row>
-            </el-form>
-          </div>
-        </section>
-
-        <section class="section-wrapper">
-          <div class="section-header">
-            <h3>账号管理</h3>
-          </div>
-          <div class="section-content">
-            <el-form class="info-list-inline">
-              <el-row :gutter="20">
-                <el-col :span="8">
-                  <el-form-item label="用户名：">
-                    <span>root</span>
-                  </el-form-item>
-                </el-col>
-                <el-col :span="8">
-                  <el-form-item label="数据库名称：">
-                    <span>admin</span>
-                  </el-form-item>
-                </el-col>
-                <el-col :span="8">
-                  <el-form-item label="密码：">
-                    <span>********(购买时候设置）</span>
-                  </el-form-item>
-                </el-col>
-              </el-row>
-            </el-form>
-          </div>
-        </section>
-
-        <section class="section-wrapper">
-          <div class="section-header">
-            <h3>连接信息（仅内网）</h3>
-          </div>
-          <div class="section-content">
-            <el-form class="info-list-inline">
-              <el-row :gutter="20">
-                <el-col :span="8">
-                  <el-form-item label="节点1：">
-                    <span>jmongo-hb1-prod-mongo-h4s8nhv1rt1.jmiss.jcloud.com:27017</span>
-                  </el-form-item>
-                </el-col>
-                <el-col :span="8">
-                  <el-form-item label="节点2：">
-                    <span>jmongo-hb1-prod-mongo-h4s8nhv1rt2.jmiss.jcloud.com:27017</span>
-                  </el-form-item>
-                </el-col>
-                <el-col :span="8">
-                  <el-form-item label="副本集名称：">
-                    <span>mgset-4176727665</span>
-                  </el-form-item>
-                </el-col>
-              </el-row>
-            </el-form>
-          </div>
-        </section>
+      <div class="section-header">
+        <h3>代金券信息</h3>
+      </div>
+      <div class="section-content">
+        <el-form class="info-list-inline">
+          <el-row :gutter="20">
+            <el-col :span="8">
+              <el-form-item label="用户Pin：">
+                <span>yangxinran</span>
+              </el-form-item>
+            </el-col>
+            <el-col :span="8">
+              <el-form-item label="代金券编码：">
+                <span>ID11002</span>
+              </el-form-item>
+            </el-col>
+            <el-col :span="8">
+              <el-form-item label="适用产品：">
+                <span>全部</span>
+              </el-form-item>
+            </el-col>
+          </el-row>
+          <el-row :gutter="20">
+            <el-col :span="8">
+              <el-form-item label="金额：">
+                <span>3000</span>
+              </el-form-item>
+            </el-col>
+            <el-col :span="8">
+              <el-form-item label="余额：">
+                <span>3000</span>
+              </el-form-item>
+            </el-col>
+            <el-col :span="8">
+              <el-form-item label="有效时间：">
+                <span>2016-07-31 19:03:44 到 2016-07-31 19:03:44</span>
+              </el-form-item>
+            </el-col>
+          </el-row>
+          <el-row :gutter="20">
+            <el-col :span="8">
+              <el-form-item label="创建时间：">
+                <span>2016-07-31 19:03:44</span>
+              </el-form-item>
+            </el-col>
+            <el-col :span="8">
+              <el-form-item label="计费类型：">
+                <span>配置计费</span>
+              </el-form-item>
+            </el-col>
+            <el-col :span="8">
+              <el-form-item label="购买方式：">
+                <span>新购|续费</span>
+              </el-form-item>
+            </el-col>
+          </el-row>
+          <el-row :gutter="20">
+            <el-col :span="8">
+              <el-form-item label="发放方式：">
+                <a @click.prevent="receiveShow = true">链接领取</a>
+                <span>定向发放</span>
+              </el-form-item>
+            </el-col>
+            <el-col :span="8">
+              <el-form-item label="状态：">
+                <span class="text-success">生效</span>
+              </el-form-item>
+            </el-col>
+            <el-col :span="8">
+              <el-form-item label="绑定用户名：">
+                <span>--</span>
+              </el-form-item>
+            </el-col>
+          </el-row>
+          <el-row :gutter="20">
+            <el-col :span="8">
+              <el-form-item label="绑定时间：">
+                <span>--</span>
+              </el-form-item>
+            </el-col>
+          </el-row>
+        </el-form>
+      </div>
+    </section>
+    <section class="section-wrapper">
+      <div class="section-header">
+        <h3>配置信息</h3>
+      </div>
+      <div class="section-content">
+        <el-form class="info-list-inline">
+          <el-form-item label="申请人：">
+            <span>自动获取ERP姓名</span>
+          </el-form-item>
+          <el-form-item label="申请部门：">
+            <span>ERP获取</span>
+          </el-form-item>
+          <el-form-item label="申请理由：">
+            <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus .</span>
+          </el-form-item>
+          <el-form-item label="拒绝理由：">
+            <span>这个选项是选填，如果拒绝时候没有填写则不展示</span>
+          </el-form-item>
+        </el-form>
+      </div>
+    </section>
+    <section class="section-wrapper">
+      <div class="section-header">
+        <h3>只读实例</h3>
+      </div>
+      <div class="section-content">
+        <el-table :data="tableData" stripe style="width: 100%">
+          <el-table-column prop="id" label="ID"></el-table-column>
+          <el-table-column prop="task" label="操作任务"></el-table-column>
+          <el-table-column prop="operator" label="操作人"></el-table-column>
+          <el-table-column prop="balance" label="余额"></el-table-column>
+          <el-table-column prop="createTime" label="创建时间"></el-table-column>
+          <el-table-column prop="updateTime" label="更新时间"></el-table-column>
+        </el-table>
+        <div class="table-footer">
+          <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-sizes="[10, 20, 50]" :page-size="100" layout="total, sizes, prev, pager, next, jumper" :total="400">
+          </el-pagination>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 
