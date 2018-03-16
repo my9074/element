@@ -70,7 +70,7 @@
   <div class="page-container page-component">
     <el-row>
       <el-col :xs="24" :sm="6">
-        <side-nav :data="navsData[lang]['component']" :base="`/${ lang }/component`"></side-nav>
+        <side-nav :data="navsData[lang]['console']" :base="`/${ lang }/console`"></side-nav>
       </el-col>
       <el-col :xs="24" :sm="18">
         <router-view class="content"></router-view>

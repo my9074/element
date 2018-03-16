@@ -1,20 +1,17 @@
-import navConfig from './nav.config.json';
-import navBusinessConfig from './nav.business.config.json';
+import navNewConfig from './nav.config.json';
 
 import langs from './i18n/route.json';
-
-const BUSINESS = true;
 
 const LOAD_MAP = {
   'zh-CN': name => {
     return r => require.ensure([], () =>
       r(require(`./pages/zh-CN/${name}.vue`)),
-    'zh-CN');
+      'zh-CN');
   },
   'en-US': name => {
     return r => require.ensure([], () =>
       r(require(`./pages/en-US/${name}.vue`)),
-    'en-US');
+      'en-US');
   }
 };
 
@@ -23,96 +20,86 @@ const load = function(lang, path) {
 };
 
 const LOAD_DOCS_MAP = {
-  'zh-CN': path => {
+  'zh-CN': (path, type) => {
     return r => require.ensure([], () =>
-      r(require(`./docs/zh-CN${path}.md`)),
-    'zh-CN');
+      r(require(`./docs/zh-CN/${type}${path}.md`)),
+      'zh-CN');
   },
-  'en-US': path => {
+  'en-US': (path, type) => {
     return r => require.ensure([], () =>
-      r(require(`./docs/en-US${path}.md`)),
-    'en-US');
+      r(require(`./docs/en-US/${type}${path}.md`)),
+      'en-US');
   }
 };
 
-const LOAD_BUSINESS_DOCS_MAP = {
-  'zh-CN': path => {
-    return r => require.ensure([], () =>
-      r(require(`./docs/zh-CN/business${path}.md`)),
-    'zh-CN');
-  },
-  'en-US': path => {
-    return r => require.ensure([], () =>
-      r(require(`./docs/en-US/business${path}.md`)),
-    'en-US');
-  }
-};
-
-const loadDocs = function(lang, path) {
-  return LOAD_DOCS_MAP[lang](path);
-};
-
-const loadBusinessDocs = function(lang, path) {
-  return LOAD_BUSINESS_DOCS_MAP[lang](path);
+const loadDocs = function(lang, path, type) {
+  return LOAD_DOCS_MAP[lang](path, type);
 };
 
 const registerRoute = (navConfig, isBusiness) => {
-  let route = [];
-  Object.keys(navConfig).forEach((lang, index) => {
-    let navs = navConfig[lang];
-    route.push({
-      path: `/${ lang }/${ isBusiness ? 'business-component' : 'component' }`,
-      redirect: `/${ lang }/${ isBusiness ? 'business-component/guide' : 'component/installation' }`,
-      component: load(lang, 'component'),
-      children: []
-    });
-    navs.forEach(nav => {
-      if (nav.href) return;
-      if (nav.groups) {
-        nav.groups.forEach(group => {
-          group.list.forEach(nav => {
-            addRoute(nav, lang, index);
+  let comRoute = [];
+  Object.keys(navConfig).forEach(lang => {
+    let route = [];
+
+    let navsMap = navConfig[lang];
+    Object.keys(navsMap).forEach((type, index) => {
+      let navs = navsMap[type];
+      route.push({
+        path: `/${lang}/${type}`,
+        redirect: `/${lang}/${type}/quickstart`,
+        component: load(lang, type),
+        children: []
+      });
+
+      navs.forEach(nav => {
+        if (nav.href) return;
+        if (nav.groups) {
+          nav.groups.forEach(group => {
+            group.list.forEach(nav => {
+              addRoute(nav, lang, index, type);
+            });
           });
-        });
-      } else if (nav.children) {
-        nav.children.forEach(nav => {
-          addRoute(nav, lang, index);
-        });
-      } else {
-        addRoute(nav, lang, index);
-      }
+        } else if (nav.children) {
+          nav.children.forEach(nav => {
+            addRoute(nav, lang, index, type);
+          });
+        } else {
+          addRoute(nav, lang, index, type);
+        }
+      });
     });
+
+    function addRoute(page, lang, index, type) {
+      const component = page.path === '/changelog'
+        ? load(lang, 'changelog')
+        : loadDocs(lang, page.path, type);
+      let child = {
+        path: page.path.slice(1),
+        meta: {
+          title: page.title || page.name,
+          description: page.description,
+          namespace: page.namespace,
+          lang
+        },
+        name: `${type}-` + (page.title || page.name),
+        component: component.default || component
+      };
+
+      route[index].children.push(child);
+    }
+
+    comRoute = comRoute.concat(route);
   });
-  function addRoute(page, lang, index) {
-    const component = page.path === '/changelog'
-      ? load(lang, 'changelog')
-      : isBusiness ? loadBusinessDocs(lang, page.path) : loadDocs(lang, page.path);
-    let child = {
-      path: page.path.slice(1),
-      meta: {
-        title: page.title || page.name,
-        description: page.description,
-        namespace: page.namespace,
-        lang
-      },
-      name: (isBusiness ? 'business-component-' : 'component-') + (page.title || page.name),
-      component: component.default || component
-    };
 
-    route[index].children.push(child);
-  }
-
-  return route;
+  return comRoute;
 };
 
-let componentRoute = registerRoute(navConfig);
-let businessRoute = registerRoute(navBusinessConfig, BUSINESS);
-let route = [...componentRoute, ...businessRoute];
+let route = registerRoute(navNewConfig);
 
 const generateMiscRoutes = function(lang) {
   let guideRoute = {
-    path: `/${ lang }/guide`, // 指南
-    redirect: `/${ lang }/guide/design`,
+    path: `/${lang}/guide`, // 指南
+    redirect: `/${lang}/guide/design`,
     component: load(lang, 'guide'),
     children: [{
       path: 'design', // 设计原则
@@ -128,14 +115,14 @@ const generateMiscRoutes = function(lang) {
   };
 
   let resourceRoute = {
-    path: `/${ lang }/resource`, // 资源
+    path: `/${lang}/resource`, // 资源
     meta: { lang },
     name: 'resource' + lang,
     component: load(lang, 'resource')
   };
 
   let indexRoute = {
-    path: `/${ lang }`, // 首页
+    path: `/${lang}`, // 首页
     meta: { lang },
     name: 'home' + lang,
     component: load(lang, 'index')

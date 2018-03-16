@@ -195,7 +195,13 @@
            <li class="nav-item">
             <router-link
               active-class="active"
-              :to="`/${ lang }/business-component`">{{ langConfig.businessComponents }}
+              :to="`/${ lang }/console`">{{ langConfig.console }}
+            </router-link>
+          </li>
+          <li class="nav-item">
+            <router-link
+              active-class="active"
+              :to="`/${ lang }/background`">{{ langConfig.background }}
             </router-link>
           </li>
           <li class="nav-item">

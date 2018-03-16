@@ -21,6 +21,8 @@
         "9": "下载相关资源，用其快速搭建页面原型或高保真视觉稿，提升产品设计效率。"
       },
       "component": {},
+      "console": {},
+      "background": {},
       "changelog": {
         "1": "更新日志",
         "2": "zh-CN"
@@ -115,6 +117,8 @@
         "9": "Download relevant design resources for shaping page prototype or visual draft, increasing design efficiency."
       },
       "component": {},
+      "console": {},
+      "background": {},
       "changelog": {
         "1": "Changelog",
         "2": "en-US"
